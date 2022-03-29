@@ -2,7 +2,8 @@ import {
   StatusBar, 
   StyleSheet, 
   SafeAreaView,
-  View
+  View,
+  FlatList
 } from 'react-native';
 
 import Topo from "./source/telas/Carrinho/Topo"
@@ -10,8 +11,8 @@ import Detalhes from "./source/telas/Carrinho/Detalhes"
 import { useFonts, Montserrat_400Regular, Montserrat_700Bold } from '@expo-google-fonts/montserrat';
 import Mocks from "./source/mocks/carrinho";
 import Item from "./source/telas/Carrinho/Item"
-import { FlatList } from 'react-native-web';
 import Texto from './source/components/Texto'
+import Endereco from './source/telas/Carrinho/Endereco';
 
 export default function App() {
 
@@ -30,7 +31,7 @@ export default function App() {
           data={Mocks.itens.lista}
           renderItem={Item}
           keyExtractor={({nome})=> nome}
-          listHeaderComponent={
+          ListHeaderComponent={
             () => {
               return <>
               <Topo {...Mocks.topo}/>
@@ -38,6 +39,21 @@ export default function App() {
 
               <Texto style={styles.titulo}>{Mocks.itens.titulo}</Texto>
 
+              </>
+            }
+          }
+          ListFooterComponent={
+            () => {
+              return <>
+                
+                <Texto style={styles.titulo}>{Mocks.endereco.titulo}</Texto>
+
+                <FlatList 
+                  data={Mocks.endereco.lista}
+                  renderItem={Endereco}
+                  keyExtractor={({nome})=> nome}
+                />
+              
               </>
             }
           }
@@ -52,9 +68,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    //alignItems: 'center',
-    //justifyContent: 'center',
+    backgroundColor: '#fff'
   },
 
   titulo: {
