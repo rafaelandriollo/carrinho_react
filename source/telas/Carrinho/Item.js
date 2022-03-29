@@ -2,29 +2,18 @@ import React from "react";
 import { View, Image, StyleSheet } from "react-native";
 import Texto from "../../components/Texto";
 
-export default function Itens ({titulo, lista}) {
+export default function Item ({item:{nome, imagem}}) {
     return <>
-        <Texto style={estilos.titulo}>{titulo}</Texto>
-        {lista.map(({nome, imagem})=> {
-            return <View style={estilos.item} key={nome}>
+            <View style={estilos.item} key={nome}>
                 <Texto style={estilos.nome}>{nome}</Texto>
                 <Image style={estilos.imagem} source={imagem} />
             </View>
-        })}
-    
+   
     </>;
 }
 
 const estilos = StyleSheet.create({
-    titulo: {
-        color:"#ffa500",
-        fontWeight: "bold",
-        marginTop: 30,
-        marginBottom: 30,
-        fontSize: 25
-    },
-
-    item: {
+   item: {
         flexDirection: "row",
         borderBottomWidth: 1,
         borderBottomColor: "#ececec",
